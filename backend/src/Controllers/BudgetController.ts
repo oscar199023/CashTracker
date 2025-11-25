@@ -3,8 +3,21 @@ import Budget from "../models/Budget"
 
 
 export class BudgetController {
+
     static getAll = async (req: Request, res: Response) => {
-        console.log('Desde Budgets')
+        try {
+            const budgets = await Budget.findAll({
+                order: [
+                    ['createdAt', 'DESC']
+                ],
+                // TODO: Filtrar por el usuario autenticado
+            })
+
+            res.json(budgets)
+        } catch (error) {
+            //console.log(error)
+            res.status(500).json({error: 'Hubo un error'})
+        }
 
     }
     
@@ -15,7 +28,7 @@ export class BudgetController {
             await budget.save()
             res.status(201).json('Presupuesto Creado Correctamente')
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             res.status(500).json({error: 'Hubo un error'})
         }
 
