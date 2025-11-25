@@ -8,7 +8,22 @@ export class BudgetController {
     }
     
     static create = async (req: Request, res: Response) => {
-        console.log('Desde Budgets')
+        console.log('Desde create')
+
+    }
+    
+    static getById = async (req: Request, res: Response) => {
+        console.log('Desde getById')
+
+    }
+    
+    static updateById = async (req: Request, res: Response) => {
+        console.log('Desde updateById')
+
+    }
+    
+    static deleteById = async (req: Request, res: Response) => {
+        console.log('Desde deleteById')
 
     }
 }
