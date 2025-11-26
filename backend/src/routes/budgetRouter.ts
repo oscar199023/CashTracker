@@ -37,7 +37,12 @@ router.put('/:id',
     handleInputErrors,
     BudgetController.updateById
 )
-router.delete('/:id', BudgetController.deleteById)
+router.delete('/:id', 
+    param('id').isInt().withMessage('ID no valido')
+    .custom(value => value > 0).withMessage('El id es invalido'),
+    handleInputErrors,
+    BudgetController.deleteById
+)
 
 
 

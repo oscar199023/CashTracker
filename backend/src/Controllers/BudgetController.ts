@@ -71,7 +71,20 @@ export class BudgetController {
     }
     
     static deleteById = async (req: Request, res: Response) => {
-        console.log('Desde deleteById')
+        try {
+            const { id } = req.params
+            const budget = await Budget.findByPk(id)
+
+            if (!budget) {
+                const error = new Error('Presupuesto no encontrado')
+                return res.status(404).json({error: error.message})
+            }
+            await budget.destroy()
+            res.json('Presupuesto eliminado correctamente')
+        } catch (error) {
+            //console.log(error)
+            res.status(500).json({error: 'Hubo un error'})
+        }
 
     }
 }
